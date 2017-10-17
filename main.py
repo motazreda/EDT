@@ -3,6 +3,8 @@
 import argparse
 from core.omlete import Omlete
 from core.dump_sections import DumpSections
+from core.opcode import Opcode
+
 
 if __name__ == '__main__':
     # msfvenom -p windows/shell_bind_tcp -b '\x00' -f raw > shell.bin
@@ -50,6 +52,18 @@ if __name__ == '__main__':
         help="directory to store dumped sections files, used with -d option",
         type=str
     )
+    parser.add_argument(
+        '--op',
+        action="store",
+        help="translate opcode to assembly instructions",
+        type=str
+    )
+    parser.add_argument(
+        '--md',
+        action="store",
+        help="used with --op options to choose architecture",
+        type=str
+    )
 
     res = parser.parse_args()
     if res.s and res.c and res.p:
@@ -64,3 +78,6 @@ if __name__ == '__main__':
     elif res.d and res.dest:
         ds = DumpSections(res.d, res.dest)
         ds.dump_to_dir()
+    elif res.op and res.md:
+        m = Opcode(res.op, res.md)
+        m.translate()
