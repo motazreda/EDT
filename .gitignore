@@ -1,2 +1,4 @@
+*.exe
+*.pyc
 shell.bin
 class_template.cpp
