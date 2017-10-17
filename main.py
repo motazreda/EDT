@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-import os
 import argparse
 
 from omlete import Omlete
+from dump_sections import DumpSections
 
 if __name__ == '__main__':
 	# msfvenom -p windows/shell_bind_tcp -b '\x00' -f raw > shell.bin
@@ -12,6 +12,9 @@ if __name__ == '__main__':
 	parser.add_argument('-c', action="store", help="chunk size", type=int)
 	parser.add_argument('-p', action="store", help="choose padding size", type=int)
 	parser.add_argument('-v', action="store", help="choose variable name", type=str)
+	parser.add_argument('-d', action="store", help="dump sections of pe file in files", type=str)
+	parser.add_argument('--dest', action="store", help="directory to store dumped sections files, used with -d option", type=str)
+
 	res = parser.parse_args()
 	if res.s and res.c and res.p:
 		om = Omlete(
@@ -22,3 +25,6 @@ if __name__ == '__main__':
 			var_name=res.v
 		)
 		om.generate()
+	elif res.d and res.dest:
+		ds = DumpSections(res.d, res.dest)
+		ds.dump_to_dir()
