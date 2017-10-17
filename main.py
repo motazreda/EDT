@@ -7,7 +7,6 @@ from core.opcode import Opcode
 
 
 if __name__ == '__main__':
-    # msfvenom -p windows/shell_bind_tcp -b '\x00' -f raw > shell.bin
     banner = "[+] Exploit Development Toolkit (EDT) [+]"
     banner += "\n"
     banner += \
@@ -61,7 +60,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--md',
         action="store",
-        help="used with --op options to choose architecture",
+        help="used with --op option to choose architecture",
         type=str
     )
 
@@ -81,3 +80,5 @@ if __name__ == '__main__':
     elif res.op and res.md:
         m = Opcode(res.op, res.md)
         m.translate()
+    else:
+        parser.print_help()
