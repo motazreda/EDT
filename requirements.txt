@@ -1,2 +1,4 @@
 pefile==2017.8.1
 capstone==3.0.4
+keystone_engine==0.9.1.post3
+keystone==0.2.1

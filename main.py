@@ -4,6 +4,7 @@ import argparse
 from core.omlete import Omlete
 from core.dump_sections import DumpSections
 from core.opcode import Opcode
+from core.asmbler import Asmbler
 
 
 if __name__ == '__main__':
@@ -58,9 +59,15 @@ if __name__ == '__main__':
         type=str
     )
     parser.add_argument(
+        '--asm',
+        action="store",
+        help="translate assembly statement to opcode",
+        type=str
+    )
+    parser.add_argument(
         '--md',
         action="store",
-        help="used with --op option to choose architecture",
+        help="used with --op and --asm option to choose architecture",
         type=str
     )
 
@@ -80,5 +87,8 @@ if __name__ == '__main__':
     elif res.op and res.md:
         m = Opcode(res.op, res.md)
         m.translate()
+    elif res.asm and res.md:
+        asb = Asmbler(res.asm, res.md)
+        asb.asmble()
     else:
         parser.print_help()
