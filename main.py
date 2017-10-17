@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import os
-import sys
 import argparse
 
 from omlete import Omlete
@@ -15,5 +14,11 @@ if __name__ == '__main__':
 	parser.add_argument('-v', action="store", help="choose variable name", type=str)
 	res = parser.parse_args()
 	if res.s and res.c and res.p:
-		om = Omlete(chunk_size=res.c, padding=res.p, tag=["\\x12", "\\x34", "\\x56", "\\x78"], shellcode=res.s, var_name=res.v)
+		om = Omlete(
+			chunk_size=res.c, 
+			padding=res.p, 
+			tag=["\\x12", "\\x34", "\\x56", "\\x78"], 
+			shellcode=res.s, 
+			var_name=res.v
+		)
 		om.generate()

