@@ -2,8 +2,8 @@
 
 import argparse
 
-from omlete import Omlete
-from dump_sections import DumpSections
+from core.omlete import Omlete
+from core.dump_sections import DumpSections
 
 if __name__ == '__main__':
 	# msfvenom -p windows/shell_bind_tcp -b '\x00' -f raw > shell.bin
