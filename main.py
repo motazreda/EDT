@@ -31,7 +31,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '-p',
         action="store",
-        help="choose padding size",
+        help="choose padding size (OPTIONAL)",
         type=int
     )
     parser.add_argument(
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     )
 
     res = parser.parse_args()
-    if res.s and res.c and res.p:
+    if res.s and res.c or res.p:
         om = Omlete(
             chunk_size=res.c,
             padding=res.p,
